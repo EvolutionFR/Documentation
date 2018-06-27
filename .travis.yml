@@ -1,0 +1,24 @@
+sudo: false
+
+language: node_js
+
+node_js:
+    - node
+
+before_script:
+    - npm i -g npm@latest
+    - npm i -g gitbook-cli
+
+script:
+    - gitbook build ./ --log=debug --debug
+
+deploy:
+    provider: pages
+    skip-cleanup: true
+    github-token: $
+    keep-history: false
+    local-dir: _book
+    committer-from-gh: true
+    on:
+        branch:
+            - master
